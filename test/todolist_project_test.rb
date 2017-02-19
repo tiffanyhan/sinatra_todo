@@ -168,4 +168,16 @@ class TodoListTest < MiniTest::Test
     @todo2.due_date = due_date
     assert(@todo2.due_date, due_date)
   end
+
+  def test_to_s_with_due_date
+    @todo2.due_date = Date.new(2017, 4, 15)
+    output = <<-OUTPUT.chomp.gsub(/^\s+/, '')
+    ---- Today's Todos ----
+    [ ] Buy milk
+    [ ] Clean room (Due: Saturday April 15)
+    [ ] Go to gym
+    OUTPUT
+
+    assert_equal(output, @list.to_s)
+  end
 end
